@@ -15,26 +15,24 @@
         }
 
         :root {
-            /* Apple-Inspired Palette */
-            --apple-black: #1d1d1f;
-            --apple-blue: #007aff;
-            --apple-light-gray: #f5f5f7;
-            --apple-medium-gray: #d2d2d7; /* For borders and subtle dividers */
-            --apple-text-gray: #585859; /* For secondary text or icons */
-            --apple-white: #ffffff;
+            /* New Custom Palette */
+            --custom-near-black: #131200;
+            --custom-dark-blue: #031A6B;
+            --custom-lavender: #8175FF;
+            --custom-light-grayish-blue: #D8DBE2;
+            --site-white: #FFFFFF; /* Explicit white for high contrast needs */
 
-            /* Mapping to old variables for smoother transition, then phase out */
-            --primary-navy: var(--apple-black);
-            --lime-green: var(--apple-blue);
-            /* --electric-cyan: will be removed or replaced contextually */
-            --cool-gray: var(--apple-text-gray);
-            --light-gray: var(--apple-light-gray);
-            --white: var(--apple-white);
+            /* Mapping to a more generic naming convention for easier application */
+            --color-text-primary: var(--custom-near-black);
+            --color-text-secondary: var(--custom-dark-blue); /* Or a gray derived from the palette if needed */
+            --color-background-primary: var(--site-white);
+            --color-background-secondary: var(--custom-light-grayish-blue);
+            --color-accent-primary: var(--custom-lavender);
+            --color-accent-secondary: var(--custom-dark-blue);
+            --color-border-primary: var(--custom-light-grayish-blue); /* Can be darkened if needed */
+            --color-border-focus: var(--custom-lavender);
 
-            /* Gradients will be re-evaluated. Apple design tends towards solid colors or subtle gradients. */
-            /* --gradient-primary: linear-gradient(135deg, var(--primary-navy) 0%, var(--electric-cyan) 100%); */
-
-            /* Shadows - Apple uses subtle, layered shadows */
+            /* Preserving shadow and transition styles from previous Apple theme, adjust if they clash */
             --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
             --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -47,8 +45,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             line-height: 1.6;
-            color: var(--primary-navy); /* Default text color */
-            background-color: var(--white); /* Default background */
+            color: var(--color-text-primary); /* Default text color */
+            background-color: var(--color-background-primary); /* Default background */
             overflow-x: hidden;
         }
 
@@ -75,7 +73,7 @@
         p {
             font-size: 1.1rem;
             line-height: 1.7;
-            color: var(--apple-text-gray); /* Updated paragraph color */
+            color: var(--color-text-primary); /* Changed to primary text color for better readability */
         }
 
         /* Navigation */
@@ -83,19 +81,19 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85); /* Slightly more transparent for modern feel */
-            backdrop-filter: blur(15px); /* Standard Apple blur */
+            background: rgba(255, 255, 255, 0.85); /* Using site-white with opacity */
+            backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             padding: 1rem 0;
             z-index: 1000;
             transition: var(--transition);
-            border-bottom: 1px solid transparent; /* Prepare for scrolled state border */
+            border-bottom: 1px solid transparent;
         }
 
         .navbar.scrolled {
-            background: rgba(245, 245, 247, 0.9); /* apple-light-gray with opacity */
+            background: rgba(216, 219, 226, 0.9); /* --custom-light-grayish-blue with opacity */
             box-shadow: var(--shadow-soft);
-            border-bottom: 1px solid var(--apple-medium-gray); /* Subtle border when scrolled */
+            border-bottom: 1px solid var(--color-border-primary);
         }
 
         .nav-container {
@@ -113,7 +111,7 @@
             gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--apple-black); /* Updated logo color */
+            color: var(--color-text-primary);
             text-decoration: none;
         }
 
@@ -131,14 +129,14 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--apple-text-gray); /* Updated nav link color */
+            color: var(--color-text-secondary); /* Using dark blue for nav links */
             font-weight: 600;
             position: relative;
             transition: var(--transition);
         }
 
         .nav-links a:hover {
-            color: var(--apple-blue); /* Hover color to apple-blue */
+            color: var(--color-accent-primary); /* Hover color to lavender */
         }
 
         .nav-links a::after {
@@ -148,7 +146,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--apple-blue); /* Updated accent line to apple-blue */
+            background: var(--color-accent-primary); /* Accent line to lavender */
             transition: var(--transition);
         }
 
@@ -157,10 +155,10 @@
         }
 
         .cta-nav {
-            background: var(--apple-blue); /* Updated to apple-blue */
-            color: var(--apple-white);    /* Updated text color to white */
+            background: var(--color-accent-primary); /* Lavender background */
+            color: var(--site-white);
             padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+            border-radius: 50px; /* Keeping this for now, can be changed to 8px for consistency */
             font-weight: 700;
             text-decoration: none;
             transition: var(--transition);
@@ -170,7 +168,7 @@
         .cta-nav:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-            filter: brightness(110%); /* Subtle brightness increase on hover */
+            filter: brightness(110%);
         }
 
         /* Mobile Menu */
@@ -184,80 +182,80 @@
         .mobile-menu-btn span {
             width: 25px;
             height: 3px;
-            background: var(--primary-navy);
+            background: var(--color-text-primary); /* Burger menu lines color */
             margin: 3px 0;
             transition: var(--transition);
         }
 
         /* Hero Section */
         .hero {
-            min-height: 80vh; /* Reduced height for a more typical landing page feel */
+            min-height: 80vh;
             display: flex;
             align-items: center;
-            justify-content: center; /* Center content for Apple style */
-            text-align: center; /* Center text */
-            background: var(--apple-light-gray); /* Light background */
-            color: var(--apple-black); /* Dark text for contrast */
+            justify-content: center;
+            text-align: center;
+            background: var(--color-background-secondary); /* Light grayish blue background */
+            color: var(--color-text-primary);
             position: relative;
             overflow: hidden;
-            padding-top: 80px; /* Account for fixed navbar */
+            padding-top: 80px;
         }
 
-        .hero::before { /* Optional: if keeping an image, make it subtle or a pattern */
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('images/team-workshop.jpg') center/cover; /* Keep image for now */
-            opacity: 0.05; /* Much more subtle, or remove if too distracting */
+            background: url('images/team-workshop.jpg') center/cover;
+            opacity: 0.05;
             z-index: 1;
         }
 
         .hero-content {
-            max-width: 800px; /* Adjusted for centered content */
+            max-width: 800px;
             margin: 0 auto;
-            padding: 2rem; /* Ensure padding */
+            padding: 2rem;
             z-index: 2;
             position: relative;
         }
 
         .hero-text {
-            max-width: 100%; /* Allow text to use the content width */
+            max-width: 100%;
         }
 
         .hero h1 {
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease-out;
-            color: var(--apple-black); /* Ensure h1 color is dark */
+            color: var(--color-text-primary);
         }
 
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: var(--apple-text-gray); /* Use text gray for hero paragraph */
+            color: var(--color-text-secondary); /* Dark blue for hero paragraph */
             animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--apple-blue);
-            color: var(--apple-white);
+            background: var(--color-accent-primary); /* Lavender background */
+            color: var(--site-white);
             padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
-            border-radius: 8px; /* Slightly more squared, common in Apple UI */
+            border-radius: 8px;
             transition: var(--transition);
             box-shadow: var(--shadow-soft);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px); /* Reduced Y transform */
+            transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-            filter: brightness(110%); /* Subtle brightness increase */
+            filter: brightness(110%);
         }
 
         /* Section Styles */
@@ -278,7 +276,7 @@
 
         .section-header h2 {
             margin-bottom: 1rem;
-            color: var(--apple-black); /* Solid, high-contrast text color */
+            color: var(--color-text-primary);
             /* Removed background-clip and text-fill-color properties */
         }
 
@@ -286,11 +284,12 @@
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
+            color: var(--color-text-secondary); /* Section header paragraph */
         }
 
         /* About Section */
         .about {
-            background: var(--apple-light-gray); /* Ensure it uses the new variable */
+            background: var(--color-background-secondary);
         }
 
         .about-content {
@@ -301,19 +300,19 @@
         }
 
         .about-text h3 {
-            color: var(--apple-black); /* Updated heading color */
+            color: var(--color-text-primary);
             margin-bottom: 1.5rem;
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
-            color: var(--apple-text-gray); /* Ensure paragraph color */
+            color: var(--color-text-primary); /* Changed to primary text for consistency */
         }
 
         .about-image {
             position: relative;
-            border-radius: 12px; /* Apple-like rounded corners */
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow-soft);
         }
@@ -332,7 +331,7 @@
         /* VAI Framework */
         .vai-framework {
             padding: 6rem 0;
-            background: var(--apple-white); /* Explicitly white background */
+            background: var(--color-background-primary);
         }
 
         .framework-grid {
@@ -343,12 +342,12 @@
         }
 
         .framework-card {
-            background: var(--apple-light-gray); /* Light gray background for cards */
+            background: var(--color-background-primary); /* White card background */
             padding: 3rem 2rem;
-            border-radius: 12px; /* Apple-like rounded corners */
+            border-radius: 12px;
             text-align: center;
-            box-shadow: none; /* Remove shadow, rely on bg differentiation */
-            border: 1px solid var(--apple-medium-gray); /* Subtle border */
+            box-shadow: none;
+            border: 1px solid var(--color-border-primary); /* light grayish blue border */
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -361,14 +360,14 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--apple-blue); /* Use apple-blue for accent */
+            background: var(--color-accent-primary); /* Lavender accent */
             transform: scaleX(0);
             transition: var(--transition);
         }
 
         .framework-card:hover {
-            transform: translateY(-5px); /* More subtle hover effect */
-            box-shadow: var(--shadow-soft); /* Add shadow on hover */
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-soft);
             border-color: transparent;
         }
 
@@ -377,90 +376,89 @@
         }
 
         .framework-icon {
-            width: 60px; /* Slightly smaller icon */
+            width: 60px;
             height: 60px;
-            background: var(--apple-blue); /* Use apple-blue */
+            background: var(--color-accent-primary); /* Lavender background for icon */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: 1.8rem; /* Adjusted font size */
-            color: var(--apple-white); /* White icon text */
+            font-size: 1.8rem;
+            color: var(--site-white);
         }
 
         .framework-card h3 {
-            color: var(--apple-black); /* Updated heading color */
+            color: var(--color-text-primary);
             margin-bottom: 1rem;
         }
 
         /* Core Values */
         .core-values {
-            background: var(--apple-light-gray); /* Change to light gray background */
-            color: var(--apple-black); /* Default text to dark */
+            background: var(--color-background-secondary); /* Light grayish blue background */
+            color: var(--color-text-primary);
         }
 
-        .core-values .section-header h2 { /* Ensure section header text is dark */
-            color: var(--apple-black);
-            -webkit-text-fill-color: initial; /* Override potential parent styles */
+        .core-values .section-header h2 {
+            color: var(--color-text-primary);
+            -webkit-text-fill-color: initial;
         }
 
         .core-values .section-header p {
-            color: var(--apple-text-gray);
+            color: var(--color-text-secondary);
         }
 
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax */
-            gap: 2rem; /* Slightly reduced gap */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
         .value-card {
-            padding: 2.5rem; /* Adjusted padding */
-            border-radius: 12px; /* Apple-like rounded corners */
-            background: var(--apple-white); /* White background for cards */
-            /* backdrop-filter: blur(10px); Removed blur as background is solid now */
-            border: 1px solid var(--apple-medium-gray); /* Subtle border */
+            padding: 2.5rem;
+            border-radius: 12px;
+            background: var(--color-background-primary); /* White card background */
+            border: 1px solid var(--color-border-primary); /* Light grayish blue border */
             transition: var(--transition);
             box-shadow: var(--shadow-soft);
         }
 
         .value-card:hover {
-            background: var(--apple-white);
+            background: var(--color-background-primary);
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
         .value-card h3 {
-            color: var(--apple-blue); /* Accent color for headings */
+            color: var(--color-accent-primary); /* Lavender for headings */
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
         .value-card p {
-            color: var(--apple-text-gray); /* Use text gray for paragraphs */
+            color: var(--color-text-primary); /* Changed to primary text for consistency */
         }
 
         /* Impact Metrics */
         .impact-metrics {
-            background: var(--apple-light-gray); /* Updated background */
+            background: var(--color-background-secondary);
             padding: 6rem 0;
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem; /* Reduced gap */
+            gap: 2rem;
             margin-top: 3rem;
         }
 
         .metric-card {
-            background: var(--apple-white); /* White background */
-            padding: 2.5rem 2rem; /* Adjusted padding */
-            border-radius: 12px; /* Apple-like corners */
+            background: var(--color-background-primary);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
             text-align: center;
             box-shadow: var(--shadow-soft);
-            border: 1px solid transparent; /* Prepare for hover */
+            border: 1px solid transparent;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -473,34 +471,33 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--apple-blue); /* Use apple-blue for hover effect */
+            background: var(--color-accent-primary); /* Lavender hover effect */
             opacity: 0;
             transition: var(--transition);
-            z-index: 0; /* Behind content */
+            z-index: 0;
         }
 
         .metric-card:hover::before {
-            opacity: 0.05; /* Very subtle blue tint on hover */
+            opacity: 0.05; /* Subtle lavender tint on hover */
         }
 
         .metric-card:hover {
-            transform: translateY(-5px); /* Subtle lift */
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
-            /* border-color: var(--apple-medium-gray); */
         }
 
         .metric-number {
-            font-size: 2.8rem; /* Slightly smaller */
-            font-weight: 700; /* Adjusted weight */
-            color: var(--apple-blue); /* Use apple-blue */
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--color-accent-primary); /* Lavender for numbers */
             margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
         }
 
         .metric-label {
-            font-size: 1rem; /* Adjusted size */
-            color: var(--apple-black); /* Use apple-black */
+            font-size: 1rem;
+            color: var(--color-text-primary);
             font-weight: 600;
             position: relative;
             z-index: 1;
@@ -508,7 +505,7 @@
 
         .metric-description {
             font-size: 0.9rem;
-            color: var(--apple-text-gray); /* Use apple-text-gray */
+            color: var(--color-text-secondary);
             margin-top: 0.5rem;
             position: relative;
             z-index: 1;
@@ -517,34 +514,34 @@
         /* Services Section */
         .services {
             padding: 6rem 0;
-            background: var(--apple-white); /* White background */
+            background: var(--color-background-primary); /* White background */
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem; /* Reduced gap */
+            gap: 2rem;
             margin-top: 3rem;
         }
 
         .service-card {
-            background: var(--apple-white);
-            border-radius: 12px; /* Apple-like corners */
+            background: var(--color-background-primary);
+            border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow-soft);
-            border: 1px solid var(--apple-medium-gray); /* Subtle border */
+            border: 1px solid var(--color-border-primary); /* Light grayish blue border */
             transition: var(--transition);
         }
 
         .service-card:hover {
-            transform: translateY(-5px); /* Subtle lift */
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
-            border-color: var(--apple-medium-gray); /* Keep border color consistent or slightly darker on hover */
+            border-color: var(--color-border-primary);
         }
 
         .service-image {
             height: 200px;
-            background: var(--apple-light-gray); /* Neutral background for image container */
+            background: var(--color-background-secondary); /* Light grayish blue for image bg */
             position: relative;
             overflow: hidden;
         }
@@ -553,7 +550,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 1; /* Ensure full opacity for images */
+            opacity: 1;
         }
 
         .service-content {
@@ -561,20 +558,20 @@
         }
 
         .service-content h3 {
-            color: var(--apple-black); /* Use apple-black */
+            color: var(--color-text-primary);
             margin-bottom: 1rem;
         }
 
         /* Testimonials */
         .testimonials {
-            background: var(--apple-blue); /* Use apple-blue as a feature section background */
-            color: var(--apple-white); /* White text on blue background */
+            background: var(--custom-dark-blue); /* Dark blue background */
+            color: var(--site-white);
             padding: 6rem 0;
         }
 
         .testimonials .section-header h2, .testimonials .section-header p {
-            color: var(--apple-white); /* Ensure header text is white */
-             -webkit-text-fill-color: initial; /* Override potential parent styles */
+            color: var(--site-white);
+             -webkit-text-fill-color: initial;
         }
 
 
@@ -588,7 +585,7 @@
             padding: 2rem;
             opacity: 0;
             transform: translateX(100px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smoother transition */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
         .testimonial.active {
@@ -601,24 +598,24 @@
             font-style: italic;
             margin-bottom: 2rem;
             line-height: 1.6;
-            color: var(--apple-white); /* Ensure quote text is white */
+            color: var(--site-white);
         }
 
         .testimonial-author {
             font-weight: 700;
-            color: var(--apple-white); /* White author on blue bg */
-            opacity: 0.9; /* Slightly less emphasis than quote */
+            color: var(--site-white);
+            opacity: 0.9;
         }
 
         .testimonial-company {
-            color: rgba(255, 255, 255, 0.7); /* Lighter white for company */
+            color: rgba(255, 255, 255, 0.7);
             margin-top: 0.5rem;
         }
 
         /* Contact Section */
         .contact {
             padding: 6rem 0;
-            background: var(--apple-light-gray); /* Updated background */
+            background: var(--color-background-secondary);
         }
 
         .contact-content {
@@ -629,41 +626,41 @@
         }
 
         .contact-form {
-            background: var(--apple-white); /* White background for form */
+            background: var(--color-background-primary);
             padding: 3rem;
-            border-radius: 12px; /* Apple-like corners */
+            border-radius: 12px;
             box-shadow: var(--shadow-soft);
-            border: 1px solid var(--apple-medium-gray); /* Subtle border */
+            border: 1px solid var(--color-border-primary);
         }
 
         .form-group {
-            margin-bottom: 1.5rem; /* Adjusted margin */
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--apple-black); /* Updated label color */
+            color: var(--color-text-primary);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.9rem 1rem; /* Adjusted padding */
-            border: 1px solid var(--apple-medium-gray); /* Standard border */
-            border-radius: 8px; /* Apple-like input field corners */
+            padding: 0.9rem 1rem;
+            border: 1px solid var(--color-border-primary);
+            border-radius: 8px;
             font-size: 1rem;
             transition: var(--transition);
             font-family: inherit;
-            background-color: var(--apple-white); /* Ensure input bg is white */
+            background-color: var(--color-background-primary);
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--apple-blue); /* Focus border to apple-blue */
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15); /* Subtle blue glow */
+            border-color: var(--color-border-focus); /* Lavender focus border */
+            box-shadow: 0 0 0 3px rgba(129, 117, 255, 0.15); /* Lavender glow */
         }
 
         .form-group textarea {
@@ -672,13 +669,13 @@
         }
 
         .submit-btn {
-            background: var(--apple-blue); /* Use apple-blue */
-            color: var(--apple-white);
+            background: var(--color-accent-primary); /* Lavender background */
+            color: var(--site-white);
             border: none;
             padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 700;
-            border-radius: 8px; /* Apple-like button corners */
+            border-radius: 8px;
             cursor: pointer;
             transition: var(--transition);
             width: 100%;
@@ -688,17 +685,17 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-            filter: brightness(110%); /* Subtle brightness increase */
+            filter: brightness(110%);
         }
 
         .contact-info h3 {
-            color: var(--apple-black); /* Updated heading color */
+            color: var(--color-text-primary);
             margin-bottom: 2rem;
         }
 
         .contact-info p {
             margin-bottom: 1rem;
-            color: var(--apple-text-gray); /* Ensure text color */
+            color: var(--color-text-primary); /* Changed to primary text for consistency */
         }
 
         .contact-item {
@@ -709,25 +706,25 @@
         }
 
         .contact-icon {
-            width: 44px; /* Slightly smaller */
+            width: 44px;
             height: 44px;
-            background: var(--apple-blue); /* Use apple-blue */
+            background: var(--color-accent-primary); /* Lavender icon background */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--apple-white); /* White icon text */
+            color: var(--site-white);
             font-weight: bold;
-            font-size: 1.2rem; /* Adjust if icons are text */
+            font-size: 1.2rem;
         }
 
         /* Footer */
         .footer {
-            background: var(--apple-light-gray); /* Light gray footer background */
-            color: var(--apple-text-gray); /* Darker text for footer */
+            background: var(--custom-dark-blue); /* Dark blue footer background */
+            color: rgba(255, 255, 255, 0.8); /* Light text for footer */
             padding: 3rem 0 2rem;
             text-align: center;
-            border-top: 1px solid var(--apple-medium-gray); /* Top border for separation */
+            /* border-top: 1px solid var(--color-border-primary); Removed top border for dark bg */
         }
 
         .footer-content {
@@ -737,9 +734,9 @@
         }
 
         .footer p {
-            color: var(--apple-text-gray); /* Footer paragraph text */
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1rem;
-            font-size: 0.9rem; /* Slightly smaller footer text */
+            font-size: 0.9rem;
         }
 
         .footer-links {
@@ -750,14 +747,14 @@
         }
 
         .footer-links a {
-            color: var(--apple-blue); /* Links use apple-blue */
+            color: var(--custom-lavender); /* Lavender links */
             text-decoration: none;
-            font-weight: 500; /* Normal weight for footer links */
+            font-weight: 500;
             transition: var(--transition);
         }
 
         .footer-links a:hover {
-            color: var(--apple-black); /* Darker hover for links */
+            color: var(--site-white); /* White hover for links */
             text-decoration: underline;
         }
 
@@ -858,7 +855,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--apple-light-gray); /* Light gray background for loading */
+            background: var(--color-background-secondary); /* Light grayish blue background */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -872,10 +869,10 @@
         }
 
         .loader {
-            width: 50px; /* Slightly smaller loader */
+            width: 50px;
             height: 50px;
-            border: 4px solid rgba(0, 122, 255, 0.2); /* apple-blue with low opacity */
-            border-top: 4px solid var(--apple-blue); /* apple-blue for spinner highlight */
+            border: 4px solid rgba(129, 117, 255, 0.2); /* Lavender with low opacity for track */
+            border-top: 4px solid var(--custom-lavender); /* Lavender for spinner highlight */
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
