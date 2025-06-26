@@ -15,15 +15,28 @@
         }
 
         :root {
-            --primary-navy: #131200;
-            --lime-green: #A6FF4D;
-            --electric-cyan: #031A6B;
-            --cool-gray: #6B7280;
-            --light-gray: #F3F4F6;
-            --white: #FFFFFF;
-            --gradient-primary: linear-gradient(135deg, var(--primary-navy) 0%, var(--electric-cyan) 100%);
-            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+            /* Apple-Inspired Palette */
+            --apple-black: #1d1d1f;
+            --apple-blue: #007aff;
+            --apple-light-gray: #f5f5f7;
+            --apple-medium-gray: #d2d2d7; /* For borders and subtle dividers */
+            --apple-text-gray: #585859; /* For secondary text or icons */
+            --apple-white: #ffffff;
+
+            /* Mapping to old variables for smoother transition, then phase out */
+            --primary-navy: var(--apple-black);
+            --lime-green: var(--apple-blue);
+            /* --electric-cyan: will be removed or replaced contextually */
+            --cool-gray: var(--apple-text-gray);
+            --light-gray: var(--apple-light-gray);
+            --white: var(--apple-white);
+
+            /* Gradients will be re-evaluated. Apple design tends towards solid colors or subtle gradients. */
+            /* --gradient-primary: linear-gradient(135deg, var(--primary-navy) 0%, var(--electric-cyan) 100%); */
+
+            /* Shadows - Apple uses subtle, layered shadows */
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -32,9 +45,10 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             line-height: 1.6;
-            color: var(--primary-navy);
+            color: var(--primary-navy); /* Default text color */
+            background-color: var(--white); /* Default background */
             overflow-x: hidden;
         }
 
@@ -61,7 +75,7 @@
         p {
             font-size: 1.1rem;
             line-height: 1.7;
-            color: var(--cool-gray);
+            color: var(--apple-text-gray); /* Updated paragraph color */
         }
 
         /* Navigation */
@@ -69,16 +83,19 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.85); /* Slightly more transparent for modern feel */
+            backdrop-filter: blur(15px); /* Standard Apple blur */
+            -webkit-backdrop-filter: blur(15px);
             padding: 1rem 0;
             z-index: 1000;
             transition: var(--transition);
+            border-bottom: 1px solid transparent; /* Prepare for scrolled state border */
         }
 
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(245, 245, 247, 0.9); /* apple-light-gray with opacity */
             box-shadow: var(--shadow-soft);
+            border-bottom: 1px solid var(--apple-medium-gray); /* Subtle border when scrolled */
         }
 
         .nav-container {
@@ -96,7 +113,7 @@
             gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--primary-navy);
+            color: var(--apple-black); /* Updated logo color */
             text-decoration: none;
         }
 
@@ -114,10 +131,14 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--primary-navy);
+            color: var(--apple-text-gray); /* Updated nav link color */
             font-weight: 600;
             position: relative;
             transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--apple-blue); /* Hover color to apple-blue */
         }
 
         .nav-links a::after {
@@ -127,7 +148,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--lime-green);
+            background: var(--apple-blue); /* Updated accent line to apple-blue */
             transition: var(--transition);
         }
 
@@ -136,8 +157,8 @@
         }
 
         .cta-nav {
-            background: var(--lime-green);
-            color: var(--primary-navy);
+            background: var(--apple-blue); /* Updated to apple-blue */
+            color: var(--apple-white);    /* Updated text color to white */
             padding: 0.75rem 1.5rem;
             border-radius: 50px;
             font-weight: 700;
@@ -149,7 +170,7 @@
         .cta-nav:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
-            background: #8FE338;
+            filter: brightness(110%); /* Subtle brightness increase on hover */
         }
 
         /* Mobile Menu */
@@ -170,69 +191,73 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 80vh; /* Reduced height for a more typical landing page feel */
             display: flex;
             align-items: center;
-            background: var(--gradient-primary);
-            color: var(--white);
+            justify-content: center; /* Center content for Apple style */
+            text-align: center; /* Center text */
+            background: var(--apple-light-gray); /* Light background */
+            color: var(--apple-black); /* Dark text for contrast */
             position: relative;
             overflow: hidden;
+            padding-top: 80px; /* Account for fixed navbar */
         }
 
-        .hero::before {
+        .hero::before { /* Optional: if keeping an image, make it subtle or a pattern */
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('images/team-workshop.jpg') center/cover;
-            opacity: 0.1;
+            background: url('images/team-workshop.jpg') center/cover; /* Keep image for now */
+            opacity: 0.05; /* Much more subtle, or remove if too distracting */
             z-index: 1;
         }
 
         .hero-content {
-            max-width: 1200px;
+            max-width: 800px; /* Adjusted for centered content */
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 2rem; /* Ensure padding */
             z-index: 2;
             position: relative;
         }
 
         .hero-text {
-            max-width: 600px;
+            max-width: 100%; /* Allow text to use the content width */
         }
 
         .hero h1 {
             margin-bottom: 1.5rem;
             animation: fadeInUp 1s ease-out;
+            color: var(--apple-black); /* Ensure h1 color is dark */
         }
 
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--apple-text-gray); /* Use text gray for hero paragraph */
             animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .cta-button {
             display: inline-block;
-            background: var(--lime-green);
-            color: var(--primary-navy);
+            background: var(--apple-blue);
+            color: var(--apple-white);
             padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 700;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 8px; /* Slightly more squared, common in Apple UI */
             transition: var(--transition);
             box-shadow: var(--shadow-soft);
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px); /* Reduced Y transform */
             box-shadow: var(--shadow-hover);
-            background: #8FE338;
+            filter: brightness(110%); /* Subtle brightness increase */
         }
 
         /* Section Styles */
@@ -253,10 +278,8 @@
 
         .section-header h2 {
             margin-bottom: 1rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--apple-black); /* Solid, high-contrast text color */
+            /* Removed background-clip and text-fill-color properties */
         }
 
         .section-header p {
@@ -267,7 +290,7 @@
 
         /* About Section */
         .about {
-            background: var(--light-gray);
+            background: var(--apple-light-gray); /* Ensure it uses the new variable */
         }
 
         .about-content {
@@ -278,18 +301,19 @@
         }
 
         .about-text h3 {
-            color: var(--primary-navy);
+            color: var(--apple-black); /* Updated heading color */
             margin-bottom: 1.5rem;
         }
 
         .about-text p {
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
+            color: var(--apple-text-gray); /* Ensure paragraph color */
         }
 
         .about-image {
             position: relative;
-            border-radius: 20px;
+            border-radius: 12px; /* Apple-like rounded corners */
             overflow: hidden;
             box-shadow: var(--shadow-soft);
         }
@@ -308,6 +332,7 @@
         /* VAI Framework */
         .vai-framework {
             padding: 6rem 0;
+            background: var(--apple-white); /* Explicitly white background */
         }
 
         .framework-grid {
@@ -318,11 +343,12 @@
         }
 
         .framework-card {
-            background: var(--white);
+            background: var(--apple-light-gray); /* Light gray background for cards */
             padding: 3rem 2rem;
-            border-radius: 20px;
+            border-radius: 12px; /* Apple-like rounded corners */
             text-align: center;
-            box-shadow: var(--shadow-soft);
+            box-shadow: none; /* Remove shadow, rely on bg differentiation */
+            border: 1px solid var(--apple-medium-gray); /* Subtle border */
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -335,14 +361,15 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: var(--lime-green);
+            background: var(--apple-blue); /* Use apple-blue for accent */
             transform: scaleX(0);
             transition: var(--transition);
         }
 
         .framework-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px); /* More subtle hover effect */
+            box-shadow: var(--shadow-soft); /* Add shadow on hover */
+            border-color: transparent;
         }
 
         .framework-card:hover::before {
@@ -350,78 +377,90 @@
         }
 
         .framework-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
+            width: 60px; /* Slightly smaller icon */
+            height: 60px;
+            background: var(--apple-blue); /* Use apple-blue */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: var(--white);
+            font-size: 1.8rem; /* Adjusted font size */
+            color: var(--apple-white); /* White icon text */
         }
 
         .framework-card h3 {
-            color: var(--primary-navy);
+            color: var(--apple-black); /* Updated heading color */
             margin-bottom: 1rem;
         }
 
         /* Core Values */
         .core-values {
-            background: var(--primary-navy);
-            color: var(--white);
+            background: var(--apple-light-gray); /* Change to light gray background */
+            color: var(--apple-black); /* Default text to dark */
+        }
+
+        .core-values .section-header h2 { /* Ensure section header text is dark */
+            color: var(--apple-black);
+            -webkit-text-fill-color: initial; /* Override potential parent styles */
+        }
+
+        .core-values .section-header p {
+            color: var(--apple-text-gray);
         }
 
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax */
+            gap: 2rem; /* Slightly reduced gap */
         }
 
         .value-card {
-            padding: 2rem;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem; /* Adjusted padding */
+            border-radius: 12px; /* Apple-like rounded corners */
+            background: var(--apple-white); /* White background for cards */
+            /* backdrop-filter: blur(10px); Removed blur as background is solid now */
+            border: 1px solid var(--apple-medium-gray); /* Subtle border */
             transition: var(--transition);
+            box-shadow: var(--shadow-soft);
         }
 
         .value-card:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--apple-white);
             transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
         }
 
         .value-card h3 {
-            color: var(--lime-green);
+            color: var(--apple-blue); /* Accent color for headings */
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
 
         .value-card p {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--apple-text-gray); /* Use text gray for paragraphs */
         }
 
         /* Impact Metrics */
         .impact-metrics {
-            background: var(--light-gray);
+            background: var(--apple-light-gray); /* Updated background */
             padding: 6rem 0;
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            gap: 2rem; /* Reduced gap */
             margin-top: 3rem;
         }
 
         .metric-card {
-            background: var(--white);
-            padding: 3rem 2rem;
-            border-radius: 20px;
+            background: var(--apple-white); /* White background */
+            padding: 2.5rem 2rem; /* Adjusted padding */
+            border-radius: 12px; /* Apple-like corners */
             text-align: center;
             box-shadow: var(--shadow-soft);
+            border: 1px solid transparent; /* Prepare for hover */
             transition: var(--transition);
             position: relative;
             overflow: hidden;
@@ -434,74 +473,78 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--gradient-primary);
+            background: var(--apple-blue); /* Use apple-blue for hover effect */
             opacity: 0;
             transition: var(--transition);
-            z-index: 1;
+            z-index: 0; /* Behind content */
         }
 
         .metric-card:hover::before {
-            opacity: 0.05;
+            opacity: 0.05; /* Very subtle blue tint on hover */
         }
 
         .metric-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px); /* Subtle lift */
             box-shadow: var(--shadow-hover);
+            /* border-color: var(--apple-medium-gray); */
         }
 
         .metric-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--lime-green);
+            font-size: 2.8rem; /* Slightly smaller */
+            font-weight: 700; /* Adjusted weight */
+            color: var(--apple-blue); /* Use apple-blue */
             margin-bottom: 0.5rem;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         .metric-label {
-            font-size: 1.1rem;
-            color: var(--primary-navy);
+            font-size: 1rem; /* Adjusted size */
+            color: var(--apple-black); /* Use apple-black */
             font-weight: 600;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         .metric-description {
             font-size: 0.9rem;
-            color: var(--cool-gray);
+            color: var(--apple-text-gray); /* Use apple-text-gray */
             margin-top: 0.5rem;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         /* Services Section */
         .services {
             padding: 6rem 0;
+            background: var(--apple-white); /* White background */
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            gap: 2rem; /* Reduced gap */
             margin-top: 3rem;
         }
 
         .service-card {
-            background: var(--white);
-            border-radius: 20px;
+            background: var(--apple-white);
+            border-radius: 12px; /* Apple-like corners */
             overflow: hidden;
             box-shadow: var(--shadow-soft);
+            border: 1px solid var(--apple-medium-gray); /* Subtle border */
             transition: var(--transition);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px); /* Subtle lift */
             box-shadow: var(--shadow-hover);
+            border-color: var(--apple-medium-gray); /* Keep border color consistent or slightly darker on hover */
         }
 
         .service-image {
             height: 200px;
-            background: var(--gradient-primary);
+            background: var(--apple-light-gray); /* Neutral background for image container */
             position: relative;
             overflow: hidden;
         }
@@ -510,7 +553,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.8;
+            opacity: 1; /* Ensure full opacity for images */
         }
 
         .service-content {
@@ -518,16 +561,22 @@
         }
 
         .service-content h3 {
-            color: var(--primary-navy);
+            color: var(--apple-black); /* Use apple-black */
             margin-bottom: 1rem;
         }
 
         /* Testimonials */
         .testimonials {
-            background: var(--gradient-primary);
-            color: var(--white);
+            background: var(--apple-blue); /* Use apple-blue as a feature section background */
+            color: var(--apple-white); /* White text on blue background */
             padding: 6rem 0;
         }
+
+        .testimonials .section-header h2, .testimonials .section-header p {
+            color: var(--apple-white); /* Ensure header text is white */
+             -webkit-text-fill-color: initial; /* Override potential parent styles */
+        }
+
 
         .testimonial-carousel {
             max-width: 800px;
@@ -539,7 +588,7 @@
             padding: 2rem;
             opacity: 0;
             transform: translateX(100px);
-            transition: var(--transition);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smoother transition */
         }
 
         .testimonial.active {
@@ -552,22 +601,24 @@
             font-style: italic;
             margin-bottom: 2rem;
             line-height: 1.6;
+            color: var(--apple-white); /* Ensure quote text is white */
         }
 
         .testimonial-author {
             font-weight: 700;
-            color: var(--lime-green);
+            color: var(--apple-white); /* White author on blue bg */
+            opacity: 0.9; /* Slightly less emphasis than quote */
         }
 
         .testimonial-company {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7); /* Lighter white for company */
             margin-top: 0.5rem;
         }
 
         /* Contact Section */
         .contact {
             padding: 6rem 0;
-            background: var(--light-gray);
+            background: var(--apple-light-gray); /* Updated background */
         }
 
         .contact-content {
@@ -578,39 +629,41 @@
         }
 
         .contact-form {
-            background: var(--white);
+            background: var(--apple-white); /* White background for form */
             padding: 3rem;
-            border-radius: 20px;
+            border-radius: 12px; /* Apple-like corners */
             box-shadow: var(--shadow-soft);
+            border: 1px solid var(--apple-medium-gray); /* Subtle border */
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem; /* Adjusted margin */
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--primary-navy);
+            color: var(--apple-black); /* Updated label color */
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #E5E7EB;
-            border-radius: 10px;
+            padding: 0.9rem 1rem; /* Adjusted padding */
+            border: 1px solid var(--apple-medium-gray); /* Standard border */
+            border-radius: 8px; /* Apple-like input field corners */
             font-size: 1rem;
             transition: var(--transition);
             font-family: inherit;
+            background-color: var(--apple-white); /* Ensure input bg is white */
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--lime-green);
-            box-shadow: 0 0 0 3px rgba(166, 255, 77, 0.1);
+            border-color: var(--apple-blue); /* Focus border to apple-blue */
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15); /* Subtle blue glow */
         }
 
         .form-group textarea {
@@ -619,30 +672,33 @@
         }
 
         .submit-btn {
-            background: var(--gradient-primary);
-            color: var(--white);
+            background: var(--apple-blue); /* Use apple-blue */
+            color: var(--apple-white);
             border: none;
             padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 700;
-            border-radius: 50px;
+            border-radius: 8px; /* Apple-like button corners */
             cursor: pointer;
             transition: var(--transition);
             width: 100%;
+            box-shadow: var(--shadow-soft);
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
+            filter: brightness(110%); /* Subtle brightness increase */
         }
 
         .contact-info h3 {
-            color: var(--primary-navy);
+            color: var(--apple-black); /* Updated heading color */
             margin-bottom: 2rem;
         }
 
         .contact-info p {
             margin-bottom: 1rem;
+            color: var(--apple-text-gray); /* Ensure text color */
         }
 
         .contact-item {
@@ -653,23 +709,25 @@
         }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--lime-green);
+            width: 44px; /* Slightly smaller */
+            height: 44px;
+            background: var(--apple-blue); /* Use apple-blue */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-navy);
+            color: var(--apple-white); /* White icon text */
             font-weight: bold;
+            font-size: 1.2rem; /* Adjust if icons are text */
         }
 
         /* Footer */
         .footer {
-            background: var(--primary-navy);
-            color: var(--white);
+            background: var(--apple-light-gray); /* Light gray footer background */
+            color: var(--apple-text-gray); /* Darker text for footer */
             padding: 3rem 0 2rem;
             text-align: center;
+            border-top: 1px solid var(--apple-medium-gray); /* Top border for separation */
         }
 
         .footer-content {
@@ -679,8 +737,9 @@
         }
 
         .footer p {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--apple-text-gray); /* Footer paragraph text */
             margin-bottom: 1rem;
+            font-size: 0.9rem; /* Slightly smaller footer text */
         }
 
         .footer-links {
@@ -691,14 +750,15 @@
         }
 
         .footer-links a {
-            color: var(--lime-green);
+            color: var(--apple-blue); /* Links use apple-blue */
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500; /* Normal weight for footer links */
             transition: var(--transition);
         }
 
         .footer-links a:hover {
-            color: var(--white);
+            color: var(--apple-black); /* Darker hover for links */
+            text-decoration: underline;
         }
 
         /* Animations */
@@ -798,7 +858,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--primary-navy);
+            background: var(--apple-light-gray); /* Light gray background for loading */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -812,10 +872,10 @@
         }
 
         .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(166, 255, 77, 0.2);
-            border-top: 4px solid var(--lime-green);
+            width: 50px; /* Slightly smaller loader */
+            height: 50px;
+            border: 4px solid rgba(0, 122, 255, 0.2); /* apple-blue with low opacity */
+            border-top: 4px solid var(--apple-blue); /* apple-blue for spinner highlight */
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
